@@ -13,18 +13,26 @@ MiddleManを使ってサイトの作成・更新が出来るようになる。
 
 
 # 構成 #
-+ インストール
-
++ はじめに
++ テンプレート
++ Frontmatter
++ 動的ページ
++ アセットパイプライン
++ きれいなURL
++ LiveReload
++ ブログ機能
 
 # 詳細 #
 
-## インストール ##
+## はじめに ##
+
+### インストール ###
 
     $ rvm gemset create middle_man
     $ rvm use ruby-1.9.3-p392@middle_man
     $ gem install middleman
 
-## 新しいサイトの開発を始める ##
+### 新しいサイトの開発を始める ###
 
     $ middleman init introduction
     $ tree introduction/
@@ -45,7 +53,7 @@ MiddleManを使ってサイトの作成・更新が出来るようになる。
             ├── all.css
             └── normalize.css
 
-## 開発サイクル ##
+### 開発サイクル ###
 
 1. サーバー起動
 
@@ -61,7 +69,7 @@ MiddleManを使ってサイトの作成・更新が出来るようになる。
         $ cd introduction
         $ middleman build
 
-## プロジェクトテンプレート ##
+### プロジェクトテンプレート ###
 
 1. HTML5 Boilerplateプロジェクト作成
 
@@ -205,7 +213,107 @@ MiddleManを使ってサイトの作成・更新が出来るようになる。
                             ├── simplenotes.js
                             ├── styles.css
                             └── template.js        
+
+## テンプレート ##
+
+### レイアウト ###
+
+introduction/source/layouts/layout.erb
+
+    <html>
+      <head>
+        <title>私のサイト</title>
+      </head>
+      <body>
+        <%= yield %>
+      </body>
+    </html>
+
+introduction/source/index.html.erb
+
+    <h1>Hello World</h1>
+
+### カスタムレイアウト ###
+
+introduction/source/layouts/admin.erb
+
+    <html>
+      <head>
+        <title>管理エリア</title>
+      </head>
+      <body>
+        <%= yield %>
+      </body>
+    </html>
+
+introduction/config.rb
+
+    page "/admin/*", :layout => "admin"
+
+introduction/source/login.html.erb
+
+    <h1>Login</h1>
+    <form>
+      <input type="text" placeholder="Email">
+      <input type="password">
+      <input type="submit">
+    </form>
+
+introduction/config.rb
+
+    page "/login.html", :layout => "admin"
+
+ブラウザで確認
+
+    http://localhost:4567/login.html
+
+### パーシャル ###
+
+introduction/source/_footer.erb
+
+    <footer>
+      Copyright 2011
+    </footer>
+
+introduction/source/layouts/layout.erb
+
+    <html>
+      <head>
+      <title>私のサイト</title>
+      </head>
+      <body>
+        <%= yield %>
+        <%= partial "footer" %>            
+      </body>
+    </html>
+
+introduction/source/layouts/admin.erb
+
+    <html>
+      <head>
+        <title>管理エリア</title>
+      </head>
+      <body>
+        <%= yield %>
+        <%= partial "footer" %>      
+      </body>
+    </html>
+
+
+## Frontmatter ##
+
+## 動的ページ ##
+
+## アセットパイプライン ##
+
+## きれいなURL ##
+
+## LiveReload ##
+
+## ブログ機能 ##
+
 # 参照 #
+
 [MiddleMan](http://middlemanapp.com/)
 
 [MiddleMan日本語ページ](http://middlemanjp.github.io/)
