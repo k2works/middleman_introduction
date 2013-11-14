@@ -563,6 +563,91 @@ config.rb
 
 ## ブログ機能 ##
 
+    $ middleman init introduction_blog --template=blog
+    $ cd introduction_blog
+
+### 記事 ###
+
+2013-11-14-middleman.html.markdown
+
+    ---
+    title: Middleman ブログ投稿
+    ---
+
+    Hello World
+
+### カスタムパス ###
+
+    $ mkdir blog
+    $ mv 2013-11-14-middleman.html.markdown blog/
+
+config.rb
+
+    blog.prefix = "blog"
+
+### パーマリンクのカスタマイズ ###
+
+013-11-14-middleman.html.markdown
+
+    ---
+    title: Middleman ブログ投稿
+    date: 2013/11/14
+    category: HTML5
+    ---
+
+    Hello World
+
+config.rb
+
+    blog.permalink = ":category/:title.html"
+
+### 下書き ###
+
+blog/2013-11-15-draft.html.markdown
+
+    ---
+    title: 作業中
+    date: 2013/11/15
+    category: HTML5
+    published: false
+    ---
+
+    完了していない下書き
+
+### タイムゾーン ###
+
+config.rb
+
+    Time.zone = "Tokyo"
+
+### 要約 ###
+
+Gemfile
+
+    gem "nokogiri"
+
+config.rb
+
+    blog.summary_separator = /(READMORE)/
+
+index.html.erb
+
+    <%= article.summary %>
+    <%= link_to 'Read more...', article %>
+
+### カスタム記事のコレクション ###
+
+config.rb
+
+    blog.custom_collections = {
+        category: {
+          link: '/categories/:category.html',
+          template: '/category.html'
+        }
+      }
+
+### カスタムコレクションヘルパ ###
+
 # 参照 #
 
 [MiddleMan](http://middlemanapp.com/)
