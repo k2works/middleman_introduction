@@ -82,3 +82,9 @@ end
 
 require "lib/custom_helpers"
 helpers CustomHelpers
+
+["tom","dick","harry"].each do |name|
+  proxy "/about/#{name}.html","/about/template.html", locals: {person_name: name}, ignore: true
+end
+
+ignore "/about/template.html"

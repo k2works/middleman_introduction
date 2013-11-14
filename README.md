@@ -446,8 +446,64 @@ asset.html.erb
         $ cp lib/custom_helpers.rb helpers/
 
 ## Frontmatter ##
++ YAML
 
+        ---
+        layout: "layout"
+        my_list:
+          - one
+          - two
+          - three
+        ---
+
+        <h1>YAMLリスト</h1>
+        <o1>
+          <% current_page.data.my_list.each do |f| %>
+            <li><%= f %></li>
+          <% end %>
+        </ol>
+
++ JSON
+
+        ;;;
+        "layout": "layout",
+        "my_list": [
+          "one",
+          "two",
+          "three"
+        ]
+        ;;;
+
+        <h1>JSONリスト</h1>
+        <o1>
+          <% current_page.data.my_list.each do |f| %>
+            <li><%= f %></li>
+          <% end %>
+        </ol>
+  
 ## 動的ページ ##
+
+### Proxyの定義 ###
+
+    $ mkdir source/about
+    $ touch source/about/template.html.erb
+
++ about/template.html.erb
+
+        ---
+        layout: layout
+        ---
+
+        <h1>テンプレート</h1>
+
++ config.rb
+
+        ["tom","dick","harry"].each do |name|
+          proxy "/about/#{name}.html","/about/template.html", locals: {person_name: name}, ignore: true
+        end
+
+        ignore "/about/template.html"
+
 
 ## アセットパイプライン ##
 
