@@ -1,12 +1,13 @@
+<% content_for :assets do %>
+  <%= stylesheet_link_tag 'index' %>
+<% end %>
+
 <h1>Hello World</h1>
 <%= link_to 'About','/about.html' ,relative: true %>
 <br>
 <%= link_to 'Dummy','/dummy.html' ,relative: true %>
 <br>
 <%= link_to '私のフォーム','/form.html', query: { foo: 'bar' }, fragment: 'deep' %>
-<% content_for :assets do %>
-  <%= stylesheet_link_tag 'index','custom' %>
-<% end %>
 <br>
 <%= tag :img, src: "http://lorempixel.com/400/200/" %>
 <br>

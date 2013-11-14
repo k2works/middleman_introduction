@@ -507,9 +507,59 @@ asset.html.erb
 
 ## アセットパイプライン ##
 
+### アセットgem ###
+Gemfile
+
+    gem "bootstrap-sass", require: false
+
+stylesheets/index.css
+
+    /*
+      *= require bootstrap
+      */
+
+    body {
+        font-weight: bold;
+        }
+
+stylesheets/custom.css
+
+    /*
+      *= require bootstrap
+      */
+
+    body {
+        font-weight: bold;
+    }
+
+layouts/layout.erb
+
+    <% if content_for?(:assets) %>
+      <div><%= yield_content :assets %></div>
+    <% end %>    
+
+index.html.erb
+
+    <% content_for :assets do %>
+        <%= stylesheet_link_tag 'index' %>
+    <% end %>
+
+dummy.html.erb
+
+    <% content_for :assets do %>
+        <%= stylesheet_link_tag 'custom' %>
+    <% end %>
+
+
 ## きれいなURL ##
++ ディレクトリインデックス拡張
+
+        activate :directory_indexes
 
 ## LiveReload ##
+config.rb
+
+    activate :livereload
 
 ## ブログ機能 ##
 
