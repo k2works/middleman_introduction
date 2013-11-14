@@ -381,69 +381,69 @@ asset.html.erb
         <%= highlight('Lorem dolor sit', 'dolor') %>
 
 ### ダミーテキスト ###
-dummy.html.erb
++ dummy.html.erb
 
-    <%= lorem.sentence %>
-    <br>
-    <%= lorem.words 5 %>
-    <br>
-    <%= lorem.word %>
-    <br>
-    <%= lorem.paragraphs 10 %>
-    <br>
-    <%= lorem.paragraph %>
-    <br>
-    <%= lorem.date %>
-    <br>
-    <%= lorem.name %>
-    <br>
-    <%= lorem.first_name %>
-    <br>
-    <%= lorem.last_name %>
-    <br>
-    <%= lorem.email %>
-    <br>
-    <%= tag :img, src: lorem.image('300x400') %>
-    <%= tag :img, src: lorem.image('300x400',background_color: '333',color: 'fff') %>
-    <%= tag :img, src: lorem.image('300x400',random_color: true) %>
-    <%= tag :img, src: lorem.image('300x400',text:'blah') %>
+        <%= lorem.sentence %>
+        <br>
+        <%= lorem.words 5 %>
+        <br>
+        <%= lorem.word %>
+        <br>
+        <%= lorem.paragraphs 10 %>
+        <br>
+        <%= lorem.paragraph %>
+        <br>
+        <%= lorem.date %>
+        <br>
+        <%= lorem.name %>
+        <br>
+        <%= lorem.first_name %>
+        <br>
+        <%= lorem.last_name %>
+        <br>
+        <%= lorem.email %>
+        <br>
+        <%= tag :img, src: lorem.image('300x400') %>
+        <%= tag :img, src: lorem.image('300x400',background_color: '333',color: 'fff') %>
+        <%= tag :img, src: lorem.image('300x400',random_color: true) %>
+        <%= tag :img, src: lorem.image('300x400',text:'blah') %>
 
 ### ページクラス ###
-layout/layout.erb
++ layout/layout.erb
 
-    <body class="<%= page_classes %>">
+        <body class="<%= page_classes %>">
 
 ### カスタム定義ヘルパ ###
-config.rb
++ config.rb
 
-    helpers do
-      def some_method
-        #...何らかの処理を追加...
-      end
-    end
+        helpers do
+          def some_method
+            #...何らかの処理を追加...
+          end
+        end
 
 + 外部モジュール
 
         $ mkdir lib
         $ touch lib/custom_helpers.rb
 
-lib/custom_helpers.rb
++ lib/custom_helpers.rb
 
-    module CustomHelpers
-      def some_method
-        # ..do something here...
-      end
-    end
+        module CustomHelpers
+          def some_method
+            # ..do something here...
+          end
+        end
 
-config.rb
++ config.rb
 
-    require "lib/custom_helpers"
-    helpers CustomHelpers
+        require "lib/custom_helpers"
+        helpers CustomHelpers
 
-より簡単な方法
++ より簡単な方法
 
-    $ mkdir helpers
-    $ cp lib/custom_helpers.rb helpers/
+        $ mkdir helpers
+        $ cp lib/custom_helpers.rb helpers/
 
 ## Frontmatter ##
 
