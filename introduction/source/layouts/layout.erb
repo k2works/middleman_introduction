@@ -2,8 +2,11 @@
   <head>
     <title>私のサイト</title>
   </head>
-  <body>
+  <body class="<%= page_classes %>">
     <%= yield %>
+    <% if content_for?(:assets) %>
+      <div><%= yield_content :assets %></div>
+    <% end %>    
     <%= partial "footer" %>
   </body>
 </html>

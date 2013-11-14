@@ -1,0 +1,24 @@
+<%= lorem.sentence %>
+<br>
+<%= lorem.words 5 %>
+<br>
+<%= lorem.word %>
+<br>
+<%= lorem.paragraphs 10 %>
+<br>
+<%= lorem.paragraph %>
+<br>
+<%= lorem.date %>
+<br>
+<%= lorem.name %>
+<br>
+<%= lorem.first_name %>
+<br>
+<%= lorem.last_name %>
+<br>
+<%= lorem.email %>
+<br>
+<%= tag :img, src: lorem.image('300x400') %>
+<%= tag :img, src: lorem.image('300x400',background_color: '333',color: 'fff') %>
+<%= tag :img, src: lorem.image('300x400',random_color: true) %>
+<%= tag :img, src: lorem.image('300x400',text:'blah') %>

@@ -300,6 +300,151 @@ introduction/source/layouts/admin.erb
     </html>
 
 
+
+## テンプレートヘルパ ##
+
+### リンクヘルパ ###
+index.html.erb
+  
+    <%= link_to 'About','/about.html' ,relative: true %>
+
+config.rb
+
+    set :relative_links, true
+
+### 出力ヘルパ ###
+layout.erb
+
+    <% if content_for?(:assets) %>
+      <div><%= yield_content :assets %></div>
+    <% end %>    
+        
+index.html.erb
+
+    <% content_for :assets do %>
+      <%= stylesheet_link_tag 'index','custom' %>
+    <% end %>
+
+### タグヘルパ ###
++ tag
++ content_tag
++ input_tag
+
+    index.html.erb
+
+        <%= tag :img, src: "http://lorempixel.com/400/200/" %>
+        <br>
+        <% content_tag :p, class: "stuff" do %>
+        こんにちは
+        <% end %>
+        <br>
+        <%= input_tag :text, class: "demo" %>
+        <br>
+        <%= input_tag :password, value: "secret",class: "demo" %>
+
+### アセットヘルパ ###
+asset.html.erb
+
+    <html>
+      <head>
+        <%= stylesheet_link_tag 'layout' %>
+        <%= javascript_include_tag 'application' %>
+        <%= favicon_tag 'images/favicon.png' %>
+      </head>
+      <body>
+        <p><%= link_to 'Blog', '/blog', class: 'example' %></p>
+        <p>Mail me at <%= mail_to 'fake@faker.com',"Fake Email Link",cc: "test@demo.com" %></p>
+        <p><%= image_tag 'padrino.png', width: '35',class:'logo' %></p>
+      </body>
+    </html>
+
+
+### フォームヘルパ ###
+
+### フォーマットヘルパ ###
++ escape_html
++ distance_of_time_in_words
++ time_ago_in_words
++ js_escape_html
+
+    format.html.erb
+
+        <%= simple_format("hellow\nworld") %>
+        <%= pluralize(2,'人') %>
+        <br>
+        <%= word_wrap('Once upon a time', line_width: 8 ) %>
+        <br>
+        <%= truncate("Once upon a time in world far far away", length: 16) %>
+        <br>
+        <%= truncate_words("Once upon a time in world far far away", length: 4) %>
+        <br>
+        <%= highlight('Lorem dolor sit', 'dolor') %>
+
+### ダミーテキスト ###
+dummy.html.erb
+
+    <%= lorem.sentence %>
+    <br>
+    <%= lorem.words 5 %>
+    <br>
+    <%= lorem.word %>
+    <br>
+    <%= lorem.paragraphs 10 %>
+    <br>
+    <%= lorem.paragraph %>
+    <br>
+    <%= lorem.date %>
+    <br>
+    <%= lorem.name %>
+    <br>
+    <%= lorem.first_name %>
+    <br>
+    <%= lorem.last_name %>
+    <br>
+    <%= lorem.email %>
+    <br>
+    <%= tag :img, src: lorem.image('300x400') %>
+    <%= tag :img, src: lorem.image('300x400',background_color: '333',color: 'fff') %>
+    <%= tag :img, src: lorem.image('300x400',random_color: true) %>
+    <%= tag :img, src: lorem.image('300x400',text:'blah') %>
+
+### ページクラス ###
+layout/layout.erb
+
+    <body class="<%= page_classes %>">
+
+### カスタム定義ヘルパ ###
+config.rb
+
+    helpers do
+      def some_method
+        #...何らかの処理を追加...
+      end
+    end
+
++ 外部モジュール
+
+        $ mkdir lib
+        $ touch lib/custom_helpers.rb
+
+lib/custom_helpers.rb
+
+    module CustomHelpers
+      def some_method
+        # ..do something here...
+      end
+    end
+
+config.rb
+
+    require "lib/custom_helpers"
+    helpers CustomHelpers
+
+より簡単な方法
+
+    $ mkdir helpers
+    $ cp lib/custom_helpers.rb helpers/
+
 ## Frontmatter ##
 
 ## 動的ページ ##
@@ -317,3 +462,5 @@ introduction/source/layouts/admin.erb
 [MiddleMan](http://middlemanapp.com/)
 
 [MiddleMan日本語ページ](http://middlemanjp.github.io/)
+
+[シリーズMiddleman で静的 Web サイトを超速プロトタイピング](http://dev.classmethod.jp/series/middleman-%E3%81%A7%E9%9D%99%E7%9A%84-web-%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E8%B6%85%E9%80%9F%E3%83%97%E3%83%AD%E3%83%88%E3%82%BF%E3%82%A4%E3%83%94%E3%83%B3%E3%82%B0/)

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ###
 # Compass
 ###
@@ -72,3 +73,12 @@ end
 page "/admin/*", :layout => "admin"
 
 page "/login.html", :layout => "admin"
+
+helpers do
+  def some_method
+    #...何らかの処理を追加...
+  end
+end
+
+require "lib/custom_helpers"
+helpers CustomHelpers
